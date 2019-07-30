@@ -31,7 +31,7 @@ def Compare():
     second= openfile(second)
     sp = input("資料轉成清單(若資料以空白、換行作為分割依據，則直接按回車鍵，若無，請輸入分割依據)：")
 
-        
+    
     if sp == "":        
         first = first.split()    
         second = second.split()
@@ -46,6 +46,28 @@ def Compare():
     
     print(result)
 
+    YN=input('要存檔此次結果嗎')    
+    if ((YN == 'Y')|(YN=='y')):
+        while True:
+            try:
+                print("當前目錄"+nw)
+                
+                SV=input('存檔位置:')
+                
+        
+                
+                file = open(SV.replace("\\","/"),"w+")
+                
+                for r in result: 
+                    file.writelines(r+"\n")
+                        
+                file.close()
+                return False
+            except:
+                print("檔案路徑錯誤!!!請重新輸入")
+                continue
+    else:
+        print("結束")
 
 
 def delr():
@@ -66,6 +88,29 @@ def delr():
         if (result[k]) > 1:
             print(k+"重複幾次?"+ str(result[k]-1))
             
+    YN=input('要存檔此次結果嗎')    
+    if ((YN == 'Y')|(YN=='y')):
+        while True:
+            try:
+                print("當前目錄"+nw)
+                SV=input('存檔位置:')
+        
+                path =nw+"/"+SV
+                file = open(path.replace("\\","/"),"w+")
+                
+                for k in key: 
+                    file.writelines(k+"\n")
+                        
+                file.close()
+                return False
+            except:
+                print("檔案路徑錯誤!!!請重新輸入")
+                continue
+    else:
+        print("結束")    
+    
+    
+            
 def regex():
     data = input("輸入檔案路徑:")
    
@@ -82,6 +127,7 @@ def regex():
     if ((YN == 'Y')|(YN=='y')):
         while True:
             try:
+                print("當前目錄"+nw)
                 SV=input('存檔位置:')
         
                 path =nw+"/"+SV
@@ -91,6 +137,7 @@ def regex():
                     file.writelines(i+"\n")
                         
                 file.close()
+                return False
             except:
                 print("檔案路徑錯誤!!!請重新輸入")
                 continue
@@ -103,14 +150,14 @@ def regex():
 
 
 
-print("比對檔案&正規化小幫手 v 0.1 beta")
+print("比對檔案&正規化小幫手 v 0.2 beta")
 
 
 print("請選擇功能項目：\n")
 print("1.比對兩份檔案")
 print("2.刪除重複項目")
 print("3.檔案分割正規化")
-
+print("4.版本更新說明")
 ch = input(":")
 
 
@@ -120,6 +167,8 @@ elif ch == "2":
     delr()
 elif ch == "3":
     regex()
+elif ch == "4":
+    print("\n\n***修正存檔loop bug***\n***tab因跨平台問題，以提示當前目錄為輔助***")
 else:
     print('輸入錯誤!!!')
 
